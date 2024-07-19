@@ -1,54 +1,36 @@
-
-define(["postmonger"], function(Postmonger) {
+define(['postmonger'], function(Postmonger) {
     "use strict";
 
     var connection = new Postmonger.Session();
     var payload = {};
     var steps = [
-        { label: "Connect your PostGrid account", key: "firstForm" },
-        { label: "Message Type", key: "secondForm" },
-        { label: "HTML", key: "thirdForm" }
+        { label: "Step 1", key: "step1" },
+        { label: "Step 2", key: "step2" },
+        { label: "Step 3", key: "step3" },
+        { label: "Step 4", key: "step4" }
     ];
-    var currentStep = steps[1].key;
+    var currentStep = steps[0].key; // Start with the first step
 
-    connection.on("initActivity", initialize);
-    connection.on("requestedTokens", onGetTokens);
-    connection.on("requestedEndpoints", onGetEndpoints);
-    connection.on("clickedNext", onClickedNext);
-    connection.on("clickedBack", onClickedBack);
-    connection.on("gotoStep", onGotoStep);
+    connection.on('initActivity', initialize);
+    connection.on('requestedTokens', onGetTokens);
+    connection.on('requestedEndpoints', onGetEndpoints);
+    connection.on('clickedNext', onClickedNext);
+    connection.on('clickedBack', onClickedBack);
+    connection.on('gotoStep', onGotoStep);
 
     $(onRender);
 
     function onRender() {
-        connection.trigger("ready");
-        connection.trigger("requestTokens");
-        connection.trigger("requestEndpoints");
+        connection.trigger('ready');
+        connection.trigger('requestTokens');
+        connection.trigger('requestEndpoints');
     }
 
     function initialize(data) {
         if (data) {
             payload = data;
         }
-
-        var hasInArguments = Boolean(
-            payload.arguments &&
-            payload.arguments.execute &&
-            payload.arguments.execute.inArguments &&
-            payload.arguments.execute.inArguments.length > 0
-        );
-
-        var inArguments = hasInArguments ? payload.arguments.execute.inArguments : {};
-
-        $.each(inArguments, function(index, inArgument) {
-            $.each(inArgument, function(key, val) {
-                if (key === "message") {
-                    // Handle initialization if needed
-                }
-            });
-        });
-
-        showStep(null, 1); // Show the first form step initially
+        showStep(currentStep); // Show the initial step
     }
 
     function onGetTokens(tokens) {
@@ -60,45 +42,41 @@ define(["postmonger"], function(Postmonger) {
     }
 
     function onClickedNext() {
-        if (currentStep === "thirdForm") {
-            save(); // Save data when on the last form step
+        var currentIndex = steps.findIndex(step => step.key === currentStep);
+        if (currentIndex < steps.length - 1) {
+            currentStep = steps[currentIndex + 1].key;
+            showStep(currentStep);
         } else {
-            connection.trigger("nextStep"); // Move to the next step
+            save(); // Save data when on the last step
         }
     }
 
     function onClickedBack() {
-        connection.trigger("prevStep"); // Move to the previous step
+        var currentIndex = steps.findIndex(step => step.key === currentStep);
+        if (currentIndex > 0) {
+            currentStep = steps[currentIndex - 1].key;
+            showStep(currentStep);
+        }
     }
 
     function onGotoStep(step) {
         showStep(step); // Show the specified step
-        connection.trigger("ready");
     }
 
-    function showStep(step, stepIndex) {
-        if (stepIndex && !step) {
-            step = steps[stepIndex - 1];
-        }
+    function showStep(step) {
+        $(".modal").hide(); // Hide all steps
+        $("#" + step).show(); // Show the current step
 
-        currentStep = step.key;
-
-        $(".modal").hide(); // Hide all modals
-        $("#" + currentStep).show(); // Show the current step's modal
-
-        switch (currentStep) {
-            case "firstForm":
-                connection.trigger("updateButton", { button: "next", enabled: true });
-                connection.trigger("updateButton", { button: "back", visible: false });
-                break;
-            case "secondForm":
-                connection.trigger("updateButton", { button: "back", visible: true });
-                connection.trigger("updateButton", { button: "next", text: "Next", visible: true });
-                break;
-            case "thirdForm":
-                connection.trigger("updateButton", { button: "back", visible: true });
-                connection.trigger("updateButton", { button: "next", text: "Done", visible: true });
-                break;
+        // Update buttons according to the current step
+        if (step === "step1") {
+            connection.trigger("updateButton", { button: "next", enabled: true });
+            connection.trigger("updateButton", { button: "back", visible: false });
+        } else {
+            connection.trigger("updateButton", { button: "back", visible: true });
+            connection.trigger("updateButton", { button: "next", visible: true });
+            if (step === "step4") {
+                connection.trigger("updateButton", { button: "next", text: "Done" });
+            }
         }
     }
 
@@ -107,7 +85,6 @@ define(["postmonger"], function(Postmonger) {
         payload.arguments.execute.inArguments = [
             { message: "This is the payload message" }
         ];
-
         payload.metaData.isConfigured = true;
 
         connection.trigger("updateActivity", payload); // Update activity with saved data
