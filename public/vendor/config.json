@@ -1,7 +1,7 @@
 {
   "workflowApiVersion": "1.1",
   "metaData": {
-    "icon": "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjY4NS0yMjAucG5n.png",
+    "icon": "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9zci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjY4NS0yMjAucG5n.png",
     "category": "custom"
   },
   "type": "REST",
@@ -23,7 +23,6 @@
         }
       ],
       "outArguments": [],
-      "url": "http://localhost:3000/execute",  
       "verb": "POST",
       "body": "{}",
       "header": "",
@@ -34,17 +33,14 @@
   },
   "configurationArguments": {
     "publish": {
-      "url": "http://localhost:3000/publish",  
       "verb": "POST",
       "useJwt": false
     },
     "validate": {
-      "url": "http://localhost:3000/validate",  
       "verb": "POST",
       "useJwt": false
     },
     "stop": {
-      "url": "http://localhost:3000/stop",  
       "verb": "POST",
       "useJwt": false
     }
@@ -62,10 +58,10 @@
       "fullscreen": true
     },
     "runningModal": {
-      "url": "public/vendor/runningModal.html"  
+      "url": "runningModal.html"
     },
     "runningHover": {
-      "url": "public/vendor/runningHover.html"  
+      "url": "runningHover.html"
     }
   }
 }
