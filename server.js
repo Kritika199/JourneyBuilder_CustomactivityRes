@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Fallback to serve index.html for any other route
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/vendor', 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Handle form submission
