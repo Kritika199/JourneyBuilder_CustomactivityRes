@@ -1,30 +1,23 @@
 {
   "workflowApiVersion": "1.1",
   "metaData": {
-    "icon": "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9zci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjY4NS0yMjAucG5n.png",
-    "category": "custom"
+    "icon": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/35cc11eb-39a9-4dac-948a-24670781c557.png",
+    "category": "message"
   },
   "type": "REST",
   "lang": {
     "en-US": {
-      "name": "Multi-Step Form Activity",
-      "description": "A custom activity with multiple steps."
+      "name": "Postgrid Custom Activity",
+      "description": "Description of custom activity"
     }
   },
   "arguments": {
     "execute": {
-      "inArguments": [
-        {
-          "key": "message",
-          "type": "text",
-          "label": "Message",
-          "description": "The message to be sent with the activity.",
-          "defaultValue": "Default message"
-        }
-      ],
+      "inArguments": [],
       "outArguments": [],
+      "url": "https://your-endpoint-url/execute",
       "verb": "POST",
-      "body": "{}",
+      "body": "",
       "header": "",
       "format": "json",
       "useJwt": false,
@@ -33,14 +26,17 @@
   },
   "configurationArguments": {
     "publish": {
+      "url": "https://your-endpoint-url/publish",
       "verb": "POST",
       "useJwt": false
     },
     "validate": {
+      "url": "https://your-endpoint-url/validate",
       "verb": "POST",
       "useJwt": false
     },
     "stop": {
+      "url": "https://your-endpoint-url/stop",
       "verb": "POST",
       "useJwt": false
     }
