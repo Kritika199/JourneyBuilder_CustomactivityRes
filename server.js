@@ -1,53 +1,32 @@
-'use strict';
-
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
-const port = 3000;
-
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Define routes for custom activity endpoints
-app.post('/publish', (req, res) => {
-    console.log('Publish request received');
-    console.log(req.body);
-    res.status(200).send('Publish endpoint hit');
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Fallback to serve index.html for any other route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/vendor', 'index.html'));
 });
 
-app.post('/validate', (req, res) => {
-    console.log('Validate request received');
-    console.log(req.body);
-    res.status(200).send('Validate endpoint hit');
-});
+// Handle form submission
+app.post('/submit', (req, res) => {
+    const formData = req.body;
+    console.log('Received form data:', formData);
 
-app.post('/execute', (req, res) => {
-    console.log('Execute request received');
-    console.log(req.body);
-    res.status(200).send('Execute endpoint hit');
-});
+    // Process form data (e.g., save to database)
+    // ...
 
-app.post('/stop', (req, res) => {
-    console.log('Stop request received');
-    console.log(req.body);
-    res.status(200).send('Stop endpoint hit');
-});
-
-// Serve config.json from the 'public/vendor' directory
-app.get('/config.json', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'vendor', 'config.json'));
-});
-
-// Serve index.html from the 'public/vendor' directory
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'vendor', 'index.html'));
+    res.status(200).send({ message: 'Form data received successfully' });
 });
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server running at http://localhost:${port}/`);
 });

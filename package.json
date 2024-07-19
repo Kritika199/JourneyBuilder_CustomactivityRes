@@ -2,11 +2,10 @@
   "name": "postgrid-journeybuilder-custom-activity",
   "version": "1.0.0",
   "description": "A custom activity for Journey Builder",
-  "main": "index.main",
-
-"scripts": {
-  "start": "node server.js"
-},
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "author": "Kritika Singh",
   "license": "ISC",
   "dependencies": {

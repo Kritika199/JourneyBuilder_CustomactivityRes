@@ -15,7 +15,7 @@
     "execute": {
       "inArguments": [],
       "outArguments": [],
-      "url": "https://your-endpoint-url/execute",
+      "url": "http://localhost:3000/execute",
       "verb": "POST",
       "body": "",
       "header": "",
@@ -26,17 +26,17 @@
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://your-endpoint-url/publish",
+      "url": "http://localhost:3000/publish",
       "verb": "POST",
       "useJwt": false
     },
     "validate": {
-      "url": "https://your-endpoint-url/validate",
+      "url": "http://localhost:3000/validate",
       "verb": "POST",
       "useJwt": false
     },
     "stop": {
-      "url": "https://your-endpoint-url/stop",
+      "url": "http://localhost:3000/stop",
       "verb": "POST",
       "useJwt": false
     }
