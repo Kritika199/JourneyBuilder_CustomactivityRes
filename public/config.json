@@ -15,7 +15,7 @@
     "execute": {
       "inArguments": [],
       "outArguments": [],
-      "url": "http://localhost:3000/execute",
+      "url": "https://journey-builder-customactivity-res.vercel.app/execute",
       "verb": "POST",
       "body": "",
       "header": "",
@@ -26,17 +26,17 @@
   },
   "configurationArguments": {
     "publish": {
-      "url": "http://localhost:3000/publish",
+      "url": "hhttps://journey-builder-customactivity-res.vercel.app/publish",
       "verb": "POST",
       "useJwt": false
     },
     "validate": {
-      "url": "http://localhost:3000/validate",
+      "url": "https://journey-builder-customactivity-res.vercel.app/validate",
       "verb": "POST",
       "useJwt": false
     },
     "stop": {
-      "url": "http://localhost:3000/stop",
+      "url": "https://journey-builder-customactivity-res.vercel.app/stop",
       "verb": "POST",
       "useJwt": false
     }
@@ -52,12 +52,6 @@
       "height": 600,
       "width": 800,
       "fullscreen": true
-    },
-    "runningModal": {
-      "url": "runningModal.html"
-    },
-    "runningHover": {
-      "url": "runningHover.html"
     }
   }
 }
