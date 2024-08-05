@@ -28,23 +28,7 @@ function logData(req) {
         originalUrl: req.originalUrl
     });
 
-    console.log("body: " + util.inspect(req.body));
-    console.log("headers: " + util.inspect(req.headers));
-    console.log("trailers: " + util.inspect(req.trailers));
-    console.log("method: " + req.method);
-    console.log("url: " + req.url);
-    console.log("params: " + util.inspect(req.params));
-    console.log("query: " + util.inspect(req.query));
-    console.log("route: " + util.inspect(req.route));
-    console.log("cookies: " + util.inspect(req.cookies));
-    console.log("ip: " + req.ip);
-    console.log("path: " + req.path);
-    console.log("host: " + req.host);
-    console.log("fresh: " + req.fresh);
-    console.log("stale: " + req.stale);
-    console.log("protocol: " + req.protocol);
-    console.log("secure: " + req.secure);
-    console.log("originalUrl: " + req.originalUrl);
+    
 }
 
 /**
