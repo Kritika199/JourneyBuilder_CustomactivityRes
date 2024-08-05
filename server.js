@@ -1,32 +1,39 @@
+'use strict';
+
+// Module Dependencies
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
+const errorhandler = require('errorhandler');
+const http = require('http');
+const routes = require('./routes');
+const activity = require('./routes/activity');
+
 const app = express();
-const port = process.env.PORT || 3000;
 
-// Middleware to parse JSON bodies
-app.use(bodyParser.json());
+// Configure Express
+app.set('port', process.env.PORT || 3000);
+app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
 
-// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Fallback to serve index.html for any other route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// Express in Development Mode
+if (app.get('env') === 'development') {
+  app.use(errorhandler());
+}
 
-// Handle form submission
-app.post('/submit', (req, res) => {
-    const formData = req.body;
-    console.log('Received form data:', formData);
+// HubExchange Routes
+app.get('/', routes.index);
+app.post('/login', routes.login);
+app.post('/logout', routes.logout);
 
-    // Process form data (e.g., save to database)
-    // ...
+// Custom Hello World Activity Routes
+app.post('/journeybuilder/save', activity.save);
+app.post('/journeybuilder/validate', activity.validate);
+app.post('/journeybuilder/publish', activity.publish);
+app.post('/journeybuilder/execute', activity.execute);
 
-    res.status(200).send({ message: 'Form data received successfully' });
-});
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
+// Create and Start HTTP Server
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
 });
