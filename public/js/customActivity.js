@@ -9,7 +9,7 @@ define(['postmonger'], function(Postmonger) {
         { label: "Step 3", key: "step3" },
         { label: "Step 4", key: "step4" }
     ];
-    var currentStep = steps[1].key; // Start with the first step
+    var currentStep = steps[2].key; // Start with the first step
 
     connection.on('initActivity', initialize);
     connection.on('requestedTokens', onGetTokens);
