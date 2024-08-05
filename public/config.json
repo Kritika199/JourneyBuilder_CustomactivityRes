@@ -13,20 +13,33 @@
   },
   "arguments": {
     "execute": {
-      "inArguments": [],
-      "outArguments": [],
-      "url": "https://journey-builder-customactivity-res.vercel.app/execute",
+      "inArguments": [
+        {
+          "myInArgument": "inArgument coming from iframe"
+        }
+      ],
+      "outArguments": [
+        {
+          "requestId": "",
+          "messageStatuses": "",
+          "errors": ""
+        }
+      ],
+      "url": "",
       "verb": "POST",
       "body": "",
       "header": "",
       "format": "json",
       "useJwt": false,
-      "timeout": 10000
+      "timeout": 25000,
+      "retryCount": 0,
+      "concurrentRequests": 1,
+      "retryDelay": 10000
     }
   },
   "configurationArguments": {
     "publish": {
-      "url": "hhttps://journey-builder-customactivity-res.vercel.app/publish",
+      "url": "https://journey-builder-customactivity-res.vercel.app/publish",
       "verb": "POST",
       "useJwt": false
     },
