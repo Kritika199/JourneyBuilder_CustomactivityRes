@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var steps = ['step1', 'step2', 'step3', 'step4'];
-    var currentStepIndex = 0; // Start with the first step
+    var currentStepIndex = 2; // Start with the first step
 
     function showStep(index) {
         steps.forEach(function(stepId, i) {
