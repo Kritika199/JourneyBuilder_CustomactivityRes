@@ -1,10 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var steps = ['step1', 'step2', 'step3', 'step4'];
+    // Define the steps with labels and keys
+    var steps = [
+        { label: "Connect your PostGrid account", key: "firstForm" },
+        { label: "Message Type", key: "secondForm" },
+        { label: "HTML", key: "thirdForm" }
+    ];
     var currentStepIndex = 0; // Start with the first step
 
     function showStep(index) {
-        steps.forEach(function(stepId, i) {
-            var stepElement = document.getElementById(stepId);
+        // Get the current step key
+        var currentStepKey = steps[index].key;
+
+        // Iterate through all steps
+        steps.forEach(function(step, i) {
+            var stepElement = document.getElementById(step.key);
+            // Show or hide step elements based on the current index
             if (i === index) {
                 stepElement.style.display = 'block';
             } else {

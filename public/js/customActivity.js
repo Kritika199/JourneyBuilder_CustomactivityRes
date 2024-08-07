@@ -4,10 +4,9 @@ define(['postmonger'], function(Postmonger) {
     var connection = new Postmonger.Session();
     var payload = {};
     var steps = [
-        { label: "Step 1", key: "step1" },
-        { label: "Step 2", key: "step2" },
-        { label: "Step 3", key: "step3" },
-        { label: "Step 4", key: "step4" }
+        { label: "Connect your PostGrid account", key: "firstForm" },
+        { label: "Message Type", key: "secondForm" },
+        { label: "HTML", key: "thirdForm" }
     ];
     var currentStep = steps[0].key; // Start with the first step
 
