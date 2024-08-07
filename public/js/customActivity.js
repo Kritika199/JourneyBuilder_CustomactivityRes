@@ -20,16 +20,16 @@ define(['postmonger'], function(Postmonger) {
     $(onRender);
 
     function onRender() {
-        console.log("connection.trigger('ready')")
-        connection.trigger('ready'); 
-        console.log(" connection.trigger('requestTokens')")
+        console.log("connection.trigger('ready')");
+        connection.trigger('ready');
+        console.log("connection.trigger('requestTokens')");
         connection.trigger('requestTokens');
-        console.log("connection.trigger('requestEndpoints')")
+        console.log("connection.trigger('requestEndpoints')");
         connection.trigger('requestEndpoints');
     }
 
     function initialize(data) {
-        console.log("function initialize")
+        console.log("function initialize");
         if (data) {
             payload = data;
         }
@@ -37,17 +37,17 @@ define(['postmonger'], function(Postmonger) {
     }
 
     function onGetTokens(tokens) {
-        console.log("function onGetTokens")
+        console.log("function onGetTokens");
         // Handle received tokens if needed
     }
 
     function onGetEndpoints(endpoints) {
-        console.log("function onGetEndpoints")
+        console.log("function onGetEndpoints");
         // Handle received endpoints if needed
     }
 
     function onClickedNext() {
-        console.log("function onClickedNext")
+        console.log("function onClickedNext");
         var currentIndex = steps.findIndex(step => step.key === currentStep);
         if (currentIndex < steps.length - 1) {
             currentStep = steps[currentIndex + 1].key;
@@ -58,8 +58,7 @@ define(['postmonger'], function(Postmonger) {
     }
 
     function onClickedBack() {
-        console.log("function onClickedBack")
-
+        console.log("function onClickedBack");
         var currentIndex = steps.findIndex(step => step.key === currentStep);
         if (currentIndex > 0) {
             currentStep = steps[currentIndex - 1].key;
@@ -68,30 +67,30 @@ define(['postmonger'], function(Postmonger) {
     }
 
     function onGotoStep(step) {
-        console.log("function onGotoStep")
+        console.log("function onGotoStep");
         showStep(step); // Show the specified step
     }
 
     function showStep(step) {
-        console.log("function showStep")
+        console.log("function showStep");
         $(".modal").hide(); // Hide all steps
         $("#" + step).show(); // Show the current step
 
         // Update buttons according to the current step
-        if (step === "step1") {
+        if (step === "firstForm") {
             connection.trigger("updateButton", { button: "next", enabled: true });
             connection.trigger("updateButton", { button: "back", visible: false });
         } else {
             connection.trigger("updateButton", { button: "back", visible: true });
             connection.trigger("updateButton", { button: "next", visible: true });
-            if (step === "step4") {
+            if (step === "thirdForm") {
                 connection.trigger("updateButton", { button: "next", text: "Done" });
             }
         }
     }
 
     function save() {
-        console.log("function save")
+        console.log("function save");
 
         // Prepare data to save
         payload.arguments.execute.inArguments = [
